@@ -1,0 +1,17 @@
+spring:
+  datasource: # localhost data-source
+    url: jdbc:postgresql://localhost:5332/jwt_security
+    username: matech
+    password: password
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop # a clean database every time a new session starts
+    show-sql: true # when a query is performed by JPA we can log and see it
+    properties:
+      hibernate:
+        format_sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    # write better queries to suit the choice of db
