@@ -38,7 +38,7 @@ The project is organized into the following key components under the <i>com.mate
 |---------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <b>Controllers</b>                    |                                                                                                                                                                                                                |
 | <code>AuthenticationController</code> | Handles [/api/v1/auth/register](http://localhost:8080/api/v1/auth/register) and [/api/v1/auth/authenticate](http://localhost:8080/api/v1/auth/authenticate) endpoints for user registration and authentication |
-| <code>DemoController</code>           | Example of a secured endpoint at [/api/v1/demo-controller](http://localhost:8080/api/v1/demo-controller)                                                                                                       |
+| <code>AppController</code>            | Example of a secured endpoint at [/api/v1/app-controller](http://localhost:8080/api/v1/app-controller)                                                                                                         |
 | <b>Services</b>                       |                                                                                                                                                                                                                |
 | <code>AuthenticationService</code>    | Contains business logic for user registration and authentication, including password encoding and JWT generation                                                                                               |
 | <code>JwtService</code>               | Manages JWT token generation and validation, including extracting claims and verifying signatures                                                                                                              |
@@ -58,12 +58,12 @@ The project is organized into the following key components under the <i>com.mate
 
 ## To Run The App
 1) Create/Connect data source (optional create your own)
-    - start docker
+    - start docker <or local>
         - run the image postgres-test-api
-    - local postgres db (matech)
-    - User: matech
-    - Password: password
-    - Database: jwt_security (schema:public)
+    - local postgres db <matech>
+    - User: <matech>
+    - Password: <password>
+    - Database: <jwt_security schema:public>
 2) Set app/jpa/configuration application.yml
     - spring
         - datasource
@@ -112,14 +112,14 @@ The project is organized into the following key components under the <i>com.mate
     - If valid, if fetches the user from <code>UserRepository</code>, generates a JWT token, and returns it in an <code>AuthenticationResponse</code>.
 
 ### Accessing Secured Endpoints
-- <b>Endpoint</b>: code>GET: /api/v1/demo-controller</code>.
+- <b>Endpoint</b>: <code>GET: /api/v1/app-controller</code>.
 - <b>Header</b>: Include the JWT token in the <code>Authorization</code> header starting with "Bearer".
 - <b>Process</b>:
     - The <code>JwtAuthenticationFilter</code> checks for the <code>Authorization</code> header starting with "Bearer"
     - It extracts the token and uses <code>JwtService</code> to validate it and extract the username (email).
     - If valid, it fetches user details via <code>UserDetailService</code>, sets the authentication in the security context,
       and allows access.
-    - The <code>DemoController</code> return a success (200) response.
+    - The <code>AppController</code> return a success (200) response.
 
 ### Summary-Flow
 <p> 
@@ -128,7 +128,7 @@ The project is organized into the following key components under the <i>com.mate
     A jwt token is used successfully to enter the secured home page. If the user is not found, consider create the user 
     first with the user details and create a new password. This will generate a valid token for 24 hrs to be used for 
     any session. If the user is already created please go to the authenticate endpoint and generate a new token and use 
-    it as bearer token in order to access the demo secured home.
+    it as bearer token in order to access the app secured home.
 </p>
 
 ## Security Configuration
